@@ -30,4 +30,4 @@ jobs:
         run: pint
 
       - name: PHPStan
-        run: vendor/bin/phpstan --error-format=github
+        run: phpstan analyse src --error-format=github
