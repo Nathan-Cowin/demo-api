@@ -17,7 +17,7 @@ jobs:
         uses: shivammathur/setup-php@v2
         with:
           php-version: 8.2 #match with project
-          tools: composer:v2, povils/phpmnd,
+          tools: composer:v2, povils/phpmnd, laravel/pint
           coverage: none
 
       - name: Install Dependencies
@@ -26,5 +26,8 @@ jobs:
       - name: PHP Magic Number Detector
         run: vendor/bin/phpmnd . --exclude tests
 
+      - name: Pint
+        run: pint
+
       - name: PHPStan
-        run: ./vendor/bin/phpstan --verbose
+        run: vendor/bin/phpstan --error-format=github
