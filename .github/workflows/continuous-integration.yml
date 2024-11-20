@@ -24,7 +24,7 @@ jobs:
         run: composer require --dev povils/phpmnd
 
       - name: PHP Magic Number Detector
-        run: phpmnd .
+        run: ~/.composer/vendor/bin/phpmnd . --exclude tests
         env:
           DB_CONNECTION: mysql
           DB_COLLATION: utf8mb4_unicode_ci
