@@ -1,31 +1,24 @@
-name: Tests
+name: Continuous Integration
 
 on: ['push', 'pull_request']
 
 jobs:
-  continous-integration:
+  continuous-integration:
     runs-on: ubuntu-latest
 
     steps:
       - name: Checkout
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       - name: Setup PHP
         uses: shivammathur/setup-php@v2
         with:
-          php-version: 8.2
-          tools: composer:v2
+          php-version: 8.2 #match with project
+          tools: composer:v2, povils/phpmnd
           coverage: xdebug
 
       - name: Install Dependencies
         run: composer install --no-interaction --prefer-dist --optimize-autoloader
 
-      - name: Require Magic Number Detector
-        run: composer require --dev povils/phpmnd
-
       - name: PHP Magic Number Detector
         run: vendor/bin/phpmnd . --exclude tests
-        env:
-          DB_CONNECTION: mysql
-          DB_COLLATION: utf8mb4_unicode_ci
-          DB_DATABASE: laravel
