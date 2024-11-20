@@ -20,6 +20,9 @@ jobs:
       - name: Install Dependencies
         run: composer install --no-interaction --prefer-dist --optimize-autoloader
 
+      - name: Require Magic Number Detector
+        run: composer require --dev povils/phpmnd
+
       - name: PHP Magic Number Detector
         run: phpmnd .
         env:
