@@ -14,11 +14,14 @@ jobs:
         uses: shivammathur/setup-php@v2
         with:
           php-version: 8.2 #match with project
-          tools: composer:v2, povils/phpmnd
-          coverage: xdebug
+          tools: composer:v2, povils/phpmnd, larastan/larastan:^3.0
+          coverage: none
 
       - name: Install Dependencies
         run: composer install --no-interaction --prefer-dist --optimize-autoloader
 
       - name: PHP Magic Number Detector
         run: vendor/bin/phpmnd . --exclude tests
+
+      - name: PHPStan
+        run: vendor/bin/phpstan --verbose
