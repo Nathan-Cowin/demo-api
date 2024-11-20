@@ -3,7 +3,7 @@
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
-    return ['Laravel' => app()->version()];
+    return ['Laravel' => 100];
 });
 
 require __DIR__.'/auth.php';
