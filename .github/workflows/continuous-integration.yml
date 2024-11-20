@@ -30,12 +30,6 @@ jobs:
       - name: Install Dependencies
         run: composer install --no-interaction --prefer-dist --optimize-autoloader
 
-      - name: Install NPM dependencies
-        run: npm ci
-
-      - name: Compile assets
-        run: npm run build
-
       - name: Execute tests
         run: vendor/bin/pest -p
         env:
