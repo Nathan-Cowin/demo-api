@@ -1,0 +1,20 @@
+name: Mixed inputs
+
+on:
+  workflow_dispatch:
+    inputs:
+      name:
+        type: number
+        description: TTL
+        default: 8
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Call Deployment Service
+        run: |
+          curl -X POST https://staging-service.example.com/environments \
+          -H "Authorization: Bearer ${{ secrets.STAGING_SERVICE_TOKEN }}" \
+          -d '{"branch": "${{ github.ref_name }}"}'
