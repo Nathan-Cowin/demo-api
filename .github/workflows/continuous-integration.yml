@@ -3,36 +3,22 @@ name: Tests
 on: ['push', 'pull_request']
 
 jobs:
-  continuous-integration:
+  ci:
     runs-on: ubuntu-latest
-
-    services:
-      mysql:
-        image: mysql:8.0
-        env:
-          MYSQL_ALLOW_EMPTY_PASSWORD: yes
-          MYSQL_DATABASE: laravel
-        ports:
-          - 3306:3306
-        options: --health-cmd="mysqladmin ping" --health-interval=10s --health-timeout=5s --health-retries=3
 
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v3
 
       - name: Setup PHP
         uses: shivammathur/setup-php@v2
         with:
-          php-version: 8.3
-          extensions: dom, curl, libxml, mbstring, zip, pcntl, pdo, sqlite, pdo_sqlite
-          coverage: none
+          php-version: 8.2
+          tools: composer:v2
+          coverage: xdebug
 
       - name: Install Dependencies
         run: composer install --no-interaction --prefer-dist --optimize-autoloader
 
-      - name: Execute tests
-        run: vendor/bin/pest --ci
-        env:
-          DB_CONNECTION: mysql
-          DB_COLLATION: utf8mb4_unicode_ci
-          DB_DATABASE: laravel
+      - name: Tests
+        run: ./vendor/bin/pest --ci
