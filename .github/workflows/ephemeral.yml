@@ -1,9 +1,9 @@
-name: Mixed inputs
+name: Deploy Ephemeral Staging
 
 on:
   workflow_dispatch:
     inputs:
-      name:
+      ttl:
         type: number
         description: TTL
         default: 8
@@ -15,6 +15,6 @@ jobs:
     steps:
       - name: Call Deployment Service
         run: |
-          curl -X POST https://staging-service.example.com/environments \
+          curl -X POST https://new-forge-service/api/deploy \
           -H "Authorization: Bearer ${{ secrets.STAGING_SERVICE_TOKEN }}" \
-          -d '{"branch": "${{ github.ref_name }}"}'
+          -d '{"branch": "${{ github.ref_name }}", "ttl": ${{ github.event.inputs.ttl }}}}'

@@ -1,0 +1,14 @@
+name: Deploy Ephemeral Staging
+
+on: ['pull_request']
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Call Deployment Service
+        run: |
+          curl -X POST https://new-forge-service/api/deploy \
+          -H "Authorization: Bearer ${{ secrets.STAGING_SERVICE_TOKEN }}" \
+          -d '{"branch": "${{ github.ref_name }}"}'
