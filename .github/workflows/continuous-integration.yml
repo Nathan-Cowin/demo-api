@@ -3,12 +3,12 @@ name: Tests
 on: ['push', 'pull_request']
 
 jobs:
-  ci:
+  continuous-integration:
     runs-on: ubuntu-22-04
 
     services:
       mysql:
-        image: mysql:8:0
+        image: mysql:8.0
         env:
           MYSQL_ALLOW_EMPTY_PASSWORD: yes
           MYSQL_DATABASE: laravel
