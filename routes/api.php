@@ -8,5 +8,5 @@ Route::middleware(['auth:sanctum'])->get('/user', function (Request $request) {
 });
 
 Route::get('/test', function () {
-    return 'testing this is ahead';
+    return 'testing another conflict';
 });
