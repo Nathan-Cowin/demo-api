@@ -29,5 +29,8 @@ jobs:
       - name: Pint
         run: pint
 
+      - name: Commit linted files
+        uses: stefanzweifel/git-auto-commit-action@v5
+
       - name: PHPStan
         run: phpstan analyse app/ --error-format=github
