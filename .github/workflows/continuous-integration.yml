@@ -2,6 +2,9 @@ name: Continuous Integration
 
 on: ['push', 'pull_request']
 
+permissions:
+  contents: write
+
 jobs:
   continuous-integration:
     runs-on: ubuntu-latest
@@ -28,6 +31,11 @@ jobs:
 
       - name: Pint
         run: pint
+
+      - name: Commit linted files
+        uses: stefanzweifel/git-auto-commit-action@v5
+        with:
+          commit_message: 'Pint Fixes'
 
       - name: PHPStan
         run: phpstan analyse app/ --error-format=github
