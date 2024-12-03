@@ -19,6 +19,5 @@ Route::middleware([
 );
 
 Route::get('/test', function () {
-
     return 'test';
 });
